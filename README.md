@@ -1,0 +1,1 @@
+DB diagram: https://drawsql.app/teams/team-1540-1/diagrams/batterytesting
