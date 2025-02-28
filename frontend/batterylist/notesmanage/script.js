@@ -24,7 +24,7 @@
 
         delete opener.getNotes()[noteId];
 
-        opener.showNotes();
+        await opener.showNotes();
         copyNotesList();
     }
 
