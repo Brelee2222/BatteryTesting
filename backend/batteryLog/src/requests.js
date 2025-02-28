@@ -36,6 +36,7 @@ module.exports = {
             const body = req.body;
             
             return await dbRecordQueries.recordNote(req.query["battery-id"], body.time, body.note);
-        }
+        },
+        "/note/remove" : req => dbRecordQueries.removeNote(req.query["note-id"])
     }
 }
