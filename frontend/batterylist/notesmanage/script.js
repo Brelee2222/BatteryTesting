@@ -38,6 +38,22 @@
     }, false);
 
     document.querySelector("#addNote").addEventListener("click", async () => {
-        addNote(opener.getBattery().id, document.querySelector("#addNoteText").value);
-    })
+        const time = Date.now();
+        addNote(battery.id, document.querySelector("#addNoteText").value, time);
+
+        const tempId = getBattery().id;
+
+        opener.selectBattery(battery.id);
+
+        getNotes()[time] = {
+            batteryId : battery.id,
+            time,
+            note
+        };
+
+        opener.selectBattery(tempId);
+
+        showNotes();
+        copyNotesList();
+    });
 }
