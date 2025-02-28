@@ -28,11 +28,13 @@ section {
     border: 1px gray solid;
     border-radius: 10px;
     margin: 5px;
-    max-height: 99999px;
 }
 
 #notesListScreen div {
     padding: 10px;
+}
+
+#notesListScreen div p {
     max-height: 99999px;
 }
 
