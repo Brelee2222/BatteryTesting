@@ -41,6 +41,7 @@ section {
 #notesListScreen .selected {
     color: white;
     background-color: blue;
+    
 }
 
 #batteryListScreen .list .item {
