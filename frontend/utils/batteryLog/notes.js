@@ -30,11 +30,4 @@
     function getNote() {
         return _notes[getBattery().id][_currentNoteId];
     }
-
-    function addNote(note) {
-        return fetch(`/BatteryTestingAPI/note/?battery-id=${batteryId}`, {method:"PUT", mode:"cors", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
-            time : Date.now(),
-            note
-        })})
-    }
 }
