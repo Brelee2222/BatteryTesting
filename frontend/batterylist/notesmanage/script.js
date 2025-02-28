@@ -38,6 +38,6 @@
     }, false);
 
     document.querySelector("#addNote").addEventListener("click", () => {
-        addNote(document.querySelector("#addNoteText").value);
+        addNote(opener.getBattery().id, document.querySelector("#addNoteText").value);
     })
 }
