@@ -5,6 +5,9 @@
     document.querySelector("#batteryName").innerText = battery.name + " Battery\nNotes Manage";
 
     function copyNotesList() {
+        if(document.querySelector("#notesListScreen"))
+            document.querySelector("#notesListScreen").remove();
+
         document.querySelector("#notesContainer").appendChild(opener.document.querySelector("#notesListScreen").cloneNode(true));
 
         const noteItems = document.querySelectorAll("#notesListScreen div");
