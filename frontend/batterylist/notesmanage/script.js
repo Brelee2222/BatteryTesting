@@ -13,9 +13,9 @@
         const noteItems = document.querySelectorAll("#notesListScreen div");
         noteItems.forEach(note => note.addEventListener("click", () => {
             noteItems.forEach(node => node.className = "item");
-            this.className = "selected item";
+            note.className = "selected item";
 
-            noteId = this.getAttribute("noteTime");
+            noteId = note.getAttribute("noteTime");
         }));
     }
 
