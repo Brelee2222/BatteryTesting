@@ -13,9 +13,9 @@
         const noteItems = document.querySelectorAll("#notesListScreen div");
         noteItems.forEach(note => note.addEventListener("click", () => {
             noteItems.forEach(node => node.className = "item");
-            note.className = "selected item";
+            this.className = "selected item";
 
-            noteId = note.getAttribute("noteTime");
+            noteId = this.getAttribute("noteTime");
         }));
     }
 
@@ -29,5 +29,15 @@
     }
 
     copyNotesList();
+
     document.querySelector("#removeNote").addEventListener("click", deleteNote);
+
+    document.querySelector("#addNoteText").addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }, false);
+
+    document.querySelector("#addNote").addEventListener("click", () => {
+        addNote(document.querySelector("#addNoteText").value);
+    })
 }
