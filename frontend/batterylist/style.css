@@ -30,6 +30,10 @@ section {
     margin: 5px;
 }
 
+#notesListScreen div {
+    padding: 32px;
+}
+
 #notesListScreen .selected {
     color: white;
     background-color: blue;
