@@ -14,7 +14,7 @@
             noteItemElement.noteTime = note.time;
             noteItemElement.note = note.note;
 
-            const dateElement = document.createElement("span");
+            const dateElement = document.createElement("p");
 
             dateElement.innerText = new Date(note.time).toLocaleString("en-US") + "<br>" + note.note;
             noteItemElement.appendChild(dateElement);
