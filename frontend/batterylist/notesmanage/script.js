@@ -16,8 +16,8 @@
         }));
     }
 
-    function deleteNote() {
-        removeNote(noteId);
+    async function deleteNote() {
+        await removeNote(noteId);
 
         delete opener.getNotes()[noteId];
 
