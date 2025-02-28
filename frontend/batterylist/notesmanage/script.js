@@ -26,5 +26,5 @@
     }
 
     copyNotesList();
-    document.querySelector("#removeNote").addEventListener("click", () => deleteNote);
+    document.querySelector("#removeNote").addEventListener("click", deleteNote);
 }
