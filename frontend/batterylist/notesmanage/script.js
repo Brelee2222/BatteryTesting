@@ -5,5 +5,8 @@
 
     document.querySelector("#notesContainer").appendChild(opener.document.querySelector("#notesListScreen").cloneNode(true));
 
-    document.querySelectorAll("#notesListScreen div").forEach(note => note.addEventListener("click", () => note.className = "selected"));
+    document.querySelectorAll("#notesListScreen div").forEach(note => note.addEventListener("click", () => {
+        document.querySelector("#notesListScreen").childNodes.forEach(node => node.className = "");
+        note.className = "selected";
+    }));
 }
