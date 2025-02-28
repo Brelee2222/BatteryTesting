@@ -28,19 +28,10 @@
         copyNotesList();
     }
 
-    copyNotesList();
-
-    document.querySelector("#removeNote").addEventListener("click", deleteNote);
-
-    document.querySelector("#addNoteText").addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-    }, false);
-
-    document.querySelector("#addNote").addEventListener("click", async () => {
+    async function addNote() {
         const time = Date.now();
         const note = document.querySelector("#addNoteText").value;
-        addNote(battery.id, note, time);
+        await addNote(battery.id, note, time);
 
         const tempId = opener.getBattery().id;
 
@@ -54,7 +45,18 @@
 
         opener.selectBattery(tempId);
 
-        opener.showNotes();
+        await opener.showNotes();
         copyNotesList();
-    });
+    }
+
+    copyNotesList();
+
+    document.querySelector("#removeNote").addEventListener("click", deleteNote);
+
+    document.querySelector("#addNoteText").addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }, false);
+
+    document.querySelector("#addNote").addEventListener("click", addNote);
 }
