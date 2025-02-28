@@ -31,7 +31,7 @@
     async function addNote() {
         const time = Date.now();
         const note = document.querySelector("#addNoteText").value;
-        await addNote(battery.id, note, time);
+        await createNote(battery.id, note, time);
 
         const tempId = opener.getBattery().id;
 
