@@ -39,7 +39,8 @@
 
     document.querySelector("#addNote").addEventListener("click", async () => {
         const time = Date.now();
-        addNote(battery.id, document.querySelector("#addNoteText").value, time);
+        const note = document.querySelector("#addNoteText").value;
+        addNote(battery.id, note, time);
 
         const tempId = opener.getBattery().id;
 
