@@ -37,7 +37,7 @@
         this.style.height = this.scrollHeight + 'px';
     }, false);
 
-    document.querySelector("#addNote").addEventListener("click", () => {
+    document.querySelector("#addNote").addEventListener("click", async () => {
         addNote(opener.getBattery().id, document.querySelector("#addNoteText").value);
     })
 }
