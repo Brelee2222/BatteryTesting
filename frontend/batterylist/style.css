@@ -34,8 +34,8 @@ section {
     padding: 10px;
 }
 
-#notesListScreen div p {
-    max-height: 99999px;
+#notesListScreen .item p {
+    max-height: 9999px;
 }
 
 #notesListScreen .selected {
