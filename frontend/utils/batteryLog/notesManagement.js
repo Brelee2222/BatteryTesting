@@ -1,6 +1,6 @@
 {
     function addNote(note) {
-        return fetch(`/BatteryTestingAPI/note/?battery-id=${batteryId}`, {method:"PUT", mode:"cors", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+        return fetch(`/BatteryTestingAPI/note/?battery-id=${getBattery().id}`, {method:"PUT", mode:"cors", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
             time : Date.now(),
             note
         })});
