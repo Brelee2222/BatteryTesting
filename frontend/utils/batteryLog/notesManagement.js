@@ -6,7 +6,7 @@
         })});
     }
     
-    function removeNote() {
-        return fetch(`/BatteryTestingAPI/note/remove/?note-id=${getNote().time}`, {method:"PUT"});
+    function removeNote(noteId) {
+        return fetch(`/BatteryTestingAPI/note/remove/?note-id=${noteId}`, {method:"PUT"});
     }
 }

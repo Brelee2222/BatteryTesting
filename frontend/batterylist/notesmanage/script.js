@@ -1,5 +1,6 @@
 {
     const battery = opener.getBattery();
+    let noteId;
 
     document.querySelector("#batteryName").innerText = battery.name + " Battery\nNotes Manage";
 
@@ -10,8 +11,8 @@
         noteItems.forEach(node => node.className = "item");
         note.className = "selected item";
 
-        selectNote(note.noteTime);
+        noteId = note.noteTime;
     }));
 
-    document.querySelector("#removeNote").addEventListener("click", removeNote);
+    document.querySelector("#removeNote").addEventListener("click", () => removeNote(noteId));
 }
