@@ -20,10 +20,11 @@
         removeNote(noteId);
 
         delete opener.getNotes()[noteId];
-        
+
         opener.showNotes();
         copyNotesList();
     }
 
+    copyNotesList();
     document.querySelector("#removeNote").addEventListener("click", () => deleteNote);
 }
