@@ -12,15 +12,12 @@
 
             noteItemElement.className = "item";
             noteItemElement.noteTime = note.time;
+            noteItemElement.note = note.note;
 
             const dateElement = document.createElement("span");
 
-            dateElement.innerText = new Date(note.time).toLocaleString("en-US");
+            dateElement.innerText = new Date(note.time).toLocaleString("en-US") + "<br>" + note.note;
             noteItemElement.appendChild(dateElement);
-
-            const noteElement = document.createElement("br");
-            noteElement.innerText = note.note;
-            noteItemElement.appendChild(noteElement);
 
             notesListElement.appendChild(noteItemElement);
         });
