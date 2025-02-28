@@ -41,11 +41,11 @@
         const time = Date.now();
         addNote(battery.id, document.querySelector("#addNoteText").value, time);
 
-        const tempId = getBattery().id;
+        const tempId = opener.getBattery().id;
 
         opener.selectBattery(battery.id);
 
-        getNotes()[time] = {
+        opener.getNotes()[time] = {
             batteryId : battery.id,
             time,
             note
@@ -53,7 +53,7 @@
 
         opener.selectBattery(tempId);
 
-        showNotes();
+        opener.showNotes();
         copyNotesList();
     });
 }
