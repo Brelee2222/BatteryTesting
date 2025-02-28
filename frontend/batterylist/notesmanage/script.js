@@ -11,7 +11,7 @@
         noteItems.forEach(node => node.className = "item");
         note.className = "selected item";
 
-        noteId = note.noteTime;
+        noteId = note.getAttribute("noteTime");
     }));
 
     document.querySelector("#removeNote").addEventListener("click", () => removeNote(noteId));

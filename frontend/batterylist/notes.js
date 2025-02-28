@@ -11,7 +11,7 @@
             const noteItemElement = document.createElement("div");
 
             noteItemElement.className = "item";
-            noteItemElement.noteTime = note.time;
+            noteItemElement.setAttribute("noteTime", note.time);
             noteItemElement.note = note.note;
 
             const dateElement = document.createElement("p");
