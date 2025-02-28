@@ -30,6 +30,11 @@ section {
     margin: 5px;
 }
 
+#notesListScreen .selected {
+    color: white;
+    background-color: blue;
+}
+
 #batteryListScreen .list .item {
     display: flex; 
     flex-direction: row; 

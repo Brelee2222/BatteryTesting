@@ -11,6 +11,7 @@
             const noteItemElement = document.createElement("div");
 
             noteItemElement.className = "item";
+            noteItemElement.noteTime = note.time;
 
             const dateElement = document.createElement("span");
 
