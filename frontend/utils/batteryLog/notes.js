@@ -1,6 +1,6 @@
 {
     let _notes = {};
-    
+
     function loadNotes() {
         const batteryId = getBattery().id;
 
@@ -18,6 +18,6 @@
     }
 
     function getNotes() {
-        return Object.values(_notes[getBattery().id]);
+        return _notes[getBattery().id];
     }
 }
