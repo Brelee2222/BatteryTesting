@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Match Record</title>
+        <script type="module" src="script.js"></script>
     </head>
     <body>
         <!-- Team Number input -->
@@ -17,10 +18,16 @@
         <select name="battery" id="battery"></select>
 
         <!-- Voltage High + Voltage Low-->
-        <label for="voltageHigh">Voltage High</label>
-        <input id="voltageHigh" type="number" min="10.5" max="14">
+        <div class="voltage">
+            <div class="high">
+                <label for="voltageHigh">Voltage High</label>
+                <input id="voltageHigh" type="number" min="10.5" max="14">
+            </div>
 
-        <label for="voltageLow">Voltage Low</label>
-        <input id="voltageLow" type="number" min="10.5" max="14">
+            <div class="low">
+                <label for="voltageLow">Voltage Low</label>
+                <input id="voltageLow" type="number" min="10.5" max="14">
+            </div>
+        </div>
     </body>
 </html>
