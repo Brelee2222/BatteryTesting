@@ -5,7 +5,8 @@
         const teamOptionElement = document.createElement("option");
 
         teamOptionElement.value = team.teamNumber;
-        
+        teamOptionElement.label = team.teamNumber;
+
         teamListElement.appendChild(teamOptionElement);
     }
 })();
