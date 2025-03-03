@@ -10,14 +10,14 @@ let matches;
         teamOptionElement.value = team.teamNumber;
         teamOptionElement.label = team.teamNumber;
 
-        teamOptionElement.addEventListener("select", async event => {
-            currentEventKey = await (fetch(`/BatteryTestingAPI/event/current?team-number=${event.target.value}`).then(res => res.text()));
-            matches = await (fetch(`/BatteryTestingAPI/event/current/matches?team-number=${event.target.value}`).then(res => res.json()));
-        });
-
         teamListElement.appendChild(teamOptionElement);
     }
 
     teamListElement.value = "";
     teamListElement.label = "";
+
+    teamListElement.addEventListener("select", async event => {
+        currentEventKey = await (fetch(`/BatteryTestingAPI/event/current?team-number=${event.target.value}`).then(res => res.text()));
+        matches = await (fetch(`/BatteryTestingAPI/event/current/matches?team-number=${event.target.value}`).then(res => res.json()));
+    });
 })();
