@@ -47,7 +47,7 @@ async function getCurrentEvent(teamNumber) {
 }
 
 async function getCurrentEventKey(teamNumber) {
-    return (await getCurrentEvent(teamNumber)).key;
+    return (await getCurrentEvent(teamNumber))?.key;
 }
 
 async function getCurrentEventMatches() {
