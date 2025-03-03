@@ -9,4 +9,7 @@
 
         teamListElement.appendChild(teamOptionElement);
     }
+
+    teamListElement.value = "";
+    teamListElement.label = "";
 })();
