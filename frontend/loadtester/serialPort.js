@@ -1,4 +1,4 @@
-import { getLoadTestingConfig } from "./configs";
+import { getLoadTestingConfig } from "./configs.js";
 
 // serial port
 let _serialPort;
