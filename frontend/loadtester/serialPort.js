@@ -1,3 +1,5 @@
+import { getLoadTestingConfig } from "./configs";
+
 // serial port
 let _serialPort;
 
