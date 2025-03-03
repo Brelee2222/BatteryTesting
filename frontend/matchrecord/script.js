@@ -16,7 +16,7 @@ let matches;
     teamListElement.value = "";
     teamListElement.label = "";
 
-    teamListElement.addEventListener("select", async event => {
+    teamListElement.addEventListener("change", async event => {
         currentEventKey = await (fetch(`/BatteryTestingAPI/event/current?team-number=${event.target.value}`).then(res => res.text()));
         matches = await (fetch(`/BatteryTestingAPI/event/current/matches?team-number=${event.target.value}`).then(res => res.json()));
     });
