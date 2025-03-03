@@ -40,7 +40,8 @@ async function getCurrentEvent(teamNumber) {
     const key = event?.key ?? "misc";
 
     if(key != "misc" && key != currentTeamsEventKey[teamNumber])
-        currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/${key}/matches/key`).then(res => res.json()));
+        currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/2024orore/matches/key`).then(res => res.json())); // Test request
+        // currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/${key}/matches/key`).then(res => res.json()));
 
     currentTeamsEventKey[teamNumber] = key;
     return event;
