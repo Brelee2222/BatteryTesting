@@ -25,8 +25,8 @@ function getEvents(teamNumber) {
 }
 
 function getEventFromTime(teamNumber, time) {
-    console.log(getEvents(teamNumber))
-    for(const event of getEvents(teamNumber)) {
+    const events = getEvents(teamNumber);
+    for(const event of events) {
         const startDate = new Date(event.start_date).getTime();
         const endDate = new Date(event.end_date).getTime() + (1000 * 60 * 60 * 24);
         if(startDate <= time && endDate >= time)
@@ -37,12 +37,12 @@ function getEventFromTime(teamNumber, time) {
 }
 
 async function getCurrentEvent(teamNumber) {
+    return await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/2024orore/matches/key`).then(res => res.json()));
     const event = getEventFromTime(teamNumber, Date.now());
     const key = event?.key ?? "misc";
 
     if(key != "misc" && key != currentTeamsEventKey[teamNumber])
-        currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/2024orore/matches/key`).then(res => res.json())); // Test request
-        // currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/${key}/matches/key`).then(res => res.json()));
+        currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/${key}/matches/key`).then(res => res.json()));
 
     currentTeamsEventKey[teamNumber] = key;
     return event;
