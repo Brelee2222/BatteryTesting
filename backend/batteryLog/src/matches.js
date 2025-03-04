@@ -52,7 +52,7 @@ async function getCurrentEventKey(teamNumber) {
     return (await getCurrentEvent(teamNumber))?.key ?? "misc";
 }
 
-async function getCurrentEventMatches() {
+async function getCurrentEventMatches(teamNumber) {
     // Updates the event
     await getCurrentEvent();
 
