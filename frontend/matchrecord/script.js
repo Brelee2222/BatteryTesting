@@ -1,3 +1,5 @@
+import { getBatteries } from "../utils/batteryLog/battery.js";
+
 let currentEventKey;
 let matchKeys;
 
@@ -38,4 +40,14 @@ function fillMatchKeys() {
 
         fillMatchKeys();
     });
+
+    const batteryListElement = document.querySelector("#battery");
+    for(const battery of getBatteries()) {
+        const batteryOption = document.createElement("option");
+
+        batteryOption.value = battery.id;
+        batteryOption.label = battery.name;
+
+        batteryListElement.appendChild(batteryOption);
+    }
 })();
