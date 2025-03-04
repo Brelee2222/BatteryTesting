@@ -1,4 +1,4 @@
-import { getBatteries } from "../utils/batteryLog/battery.js";
+import { getBatteries, batteryInit } from "../utils/batteryLog/battery.js";
 
 let currentEventKey;
 let matchKeys;
@@ -40,6 +40,8 @@ function fillMatchKeys() {
 
         fillMatchKeys();
     });
+
+    await batteryInit;
 
     const batteryListElement = document.querySelector("#battery");
     for(const battery of getBatteries()) {
