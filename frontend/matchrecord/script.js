@@ -1,4 +1,4 @@
-import { getBatteries, batteryInit } from "../utils/batteryLog/battery.js";
+import { getBatteries, batteryInit } from "../utils/battery.js";
 
 let currentEventKey;
 let matchKeys;

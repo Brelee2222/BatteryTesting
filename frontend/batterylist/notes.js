@@ -1,5 +1,5 @@
-import { getBattery } from "../utils/batteryLog/battery.js";
-import { loadNotes } from "../utils/batteryLog/notes.js";
+import { getBattery } from "../utils/battery.js";
+import { loadNotes } from "../utils/notes.js";
 
 export async function showNotes() {
     const notes = Object.values(await loadNotes());

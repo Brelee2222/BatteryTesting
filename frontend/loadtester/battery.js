@@ -1,6 +1,6 @@
-import { batteryInit, getBatteries, getBattery, selectBattery } from "../utils/batteryLog/battery.js";
-import { getTests, selectTest, loadTest } from "../utils/batteryLog/test.js";
-import { getTimestamps } from "../utils/batteryLog/testManagement.js";
+import { batteryInit, getBatteries, getBattery, selectBattery } from "../utils/battery.js";
+import { getTests, selectTest, loadTest } from "../utils/test.js";
+import { getTimestamps } from "../utils/testManagement.js";
 
 (async function() {
     // waiting for battery initialization

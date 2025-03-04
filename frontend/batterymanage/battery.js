@@ -1,5 +1,5 @@
-import { batteryInit, getBatteries, selectBattery, loadBattery } from "../utils/batteryLog/battery.js"; 
-import { deleteBatteryProfile, addBatteryProfile, editBatteryProfile } from "../utils/batteryLog/batteryManagement.js";
+import { batteryInit, getBatteries, selectBattery, loadBattery } from "../utils/battery.js"; 
+import { deleteBatteryProfile, addBatteryProfile, editBatteryProfile } from "../utils/batteryManagement.js";
 
 (async function() {
     await batteryInit;

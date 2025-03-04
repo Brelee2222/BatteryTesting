@@ -1,7 +1,7 @@
 import { sendSerialMessage } from "./serialPort.js";
 import { getLoadTestingConfig } from "./configs.js";
 import { getNextReading, READING_INTERVAL_MILLIS } from "./reading.js";
-import { logTest } from "../utils/batteryLog/testManagement.js";
+import { logTest } from "../utils/testManagement.js";
 
 /**
  * set configuration for the test

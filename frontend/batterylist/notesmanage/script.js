@@ -1,4 +1,4 @@
-import { removeNote, createNote } from "../../utils/batteryLog/notesManagement.js";
+import { removeNote, createNote } from "../../utils/notesManagement.js";
 
 const battery = opener.getBattery();
 let noteId;
