@@ -37,8 +37,8 @@ function getEventFromTime(teamNumber, time) {
 }
 
 async function getCurrentEvent(teamNumber) {
-    currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/2024orore/matches/keys`).then(res => res.json()));
-    return {key : "2024orore"};
+    // currentTeamsEventMatches[teamNumber] = await (requestGetTBA(`https://thebluealliance.com/api/v3/team/frc${teamNumber}/event/2024orore/matches/keys`).then(res => res.json()));
+    // return {key : "2024orore"};
     const event = getEventFromTime(teamNumber, Date.now());
     const key = event?.key ?? "misc";
 
