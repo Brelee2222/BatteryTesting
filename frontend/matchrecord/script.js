@@ -53,3 +53,18 @@ function fillMatchKeys() {
         batteryListElement.appendChild(batteryOption);
     }
 })();
+
+document.querySelector("#noteText").addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+}, false);
+
+document.querySelector("#submit").addEventListener("click", async() => {
+    fetch(`/BatteryTestingAPI/match/log?event-key=${currentEventKey}&match-key=${document.querySelector("#matchKey").value}&battery-id=${document.querySelector("#battery").value}`, {method:"PUT", mode:"cors", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+        teamNumber : document.querySelector("#teamNumber").value,
+        voltageHigh : document.querySelector("#voltageHigh").value,
+        voltageLow : document.querySelector("#voltageLow").value,
+        time : Date.now(),
+        note : document.querySelector("#noteText").value
+    })});
+});

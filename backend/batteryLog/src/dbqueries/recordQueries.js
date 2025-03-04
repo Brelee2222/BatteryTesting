@@ -16,10 +16,10 @@ function removeNote(noteId) {
     return database.execute(`DELETE FROM ${NOTES_TABLE} WHERE time=?;`, [noteId], () => noteId);
 }
 
-async function recordMatch(matchKey, batteryId, teamNumber, time, voltageHigh, voltageLow, note) {
+async function recordMatch(eventKey, matchKey, batteryId, teamNumber, time, voltageHigh, voltageLow, note) {
     await recordNote(batteryId, time, note);
 
-    return await database.execute(`INSERT INTO ${MATCHES_TABLE} (eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow) VALUES(?, ?, ?, ?, ?, ?, ?);`, [matchTBA.getCurrentEventKey(), matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow], result => ({notes : result, length : result.length}))
+    return await database.execute(`INSERT INTO ${MATCHES_TABLE} (eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow) VALUES(?, ?, ?, ?, ?, ?, ?);`, [eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow], result => ({notes : result, length : result.length}))
 } 
 
 module.exports = {

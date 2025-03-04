@@ -48,7 +48,7 @@ module.exports = {
         "/match/log" : req => {
             const body = req.body;
 
-            return dbRecordQueries.recordMatch(req.query["match-key"], req.query["battery-id"], body.teamNumber, body.time, body.voltageHigh, body.voltageLow, body.note);
+            return dbRecordQueries.recordMatch(req.query["event-key"], req.query["match-key"], req.query["battery-id"], body.teamNumber, body.time, body.voltageHigh, body.voltageLow, body.note);
         }
     }
 }
