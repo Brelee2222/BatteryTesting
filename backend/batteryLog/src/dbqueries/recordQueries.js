@@ -23,8 +23,7 @@ function getMatch(eventKey, matchKey, batteryId) {
 async function recordMatch(eventKey, matchKey, batteryId, teamNumber, time, voltageHigh, voltageLow, note) {
     await recordNote(batteryId, time, note);
 
-    return await database.execute(`
-    SELECT IF(EXISTS(SELECT * FROM ${MATCHES_TABLE} WHERE eventKey=?, matchKey=?, batteryId=?),UPDATE ${MATCHES_TABLE} SET time=?, teamNumber=?, voltageHigh=?, voltageLow=? WHERE eventKey=?, matchKey=?, batteryId=?,INSERT INTO ${MATCHES_TABLE} (eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow) VALUES(?, ?, ?, ?, ?, ?, ?));`, 
+    return await database.execute(`SELECT IF(EXISTS(SELECT * FROM ${MATCHES_TABLE} WHERE eventKey=?, matchKey=?, batteryId=?),UPDATE ${MATCHES_TABLE} SET time=?, teamNumber=?, voltageHigh=?, voltageLow=? WHERE eventKey=?, matchKey=?, batteryId=?,INSERT INTO ${MATCHES_TABLE} (eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow) VALUES(?, ?, ?, ?, ?, ?, ?));`, 
     [eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow, eventKey, matchKey, batteryId, eventKey, matchKey, batteryId, time, teamNumber, voltageHigh, voltageLow], () => {});
 } 
 
