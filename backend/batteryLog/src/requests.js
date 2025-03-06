@@ -35,7 +35,7 @@ module.exports = {
 
             const capacity = await dbTestsQueries.logTest(req.query["battery-id"], body.time, body.name, body.startVoltage, body.success, body.timestamps);
 
-            if(capacity > dbTestsQueries.MIN_START_VOLTAGE)
+            if(body.startVoltage > dbTestsQueries.MIN_START_VOLTAGE)
                 return await dbBatteryQueries.setBatteryCapacity(
                     req.query["battery-id"], 
                     capacity,
