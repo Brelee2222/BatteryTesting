@@ -15,7 +15,7 @@ const batteryQueries = require("./dbqueries/batteryQueries.js");
         }
 
         const filteredTests = tests.filter(test => test.startVoltage > testQueries.MIN_START_VOLTAGE);
-        if(tests.length) {
+        if(filteredTests.length) {
             const latestTest = filteredTests.reduce((a, b) => a.startTime > b.startTime ? a : b);
             await batteryQueries.setBatteryCapacity(battery.id, latestTest.capacity, latestTest.startVoltage);
         }
