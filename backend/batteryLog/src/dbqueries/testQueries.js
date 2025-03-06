@@ -4,6 +4,7 @@ const { createModel } = require('polynomial-regression');
 const TESTS_TABLE = "Tests";
 const TIMESTAMPS_TABLE = "Timestamps";
 const CODE_VERSION = 1;
+const MIN_START_VOLTAGE = 12.8;
 
 function getBatteryTests(batteryId) {
     // if(batteryId == undefined)
@@ -110,5 +111,6 @@ module.exports = {
     logTest,
     getTest,
     computeCapacity,
-    setTestCapacity
+    setTestCapacity,
+    MIN_START_VOLTAGE
 };

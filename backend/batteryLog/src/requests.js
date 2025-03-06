@@ -32,12 +32,15 @@ module.exports = {
         "/battery/remove" : req => dbBatteryQueries.removeBattery(req.query["battery-id"]),
         "/test/log" : async req => {
             const body = req.body;
-            
-            return await dbBatteryQueries.setBatteryCapacity(
-                req.query["battery-id"], 
-                await dbTestsQueries.logTest(req.query["battery-id"], body.time, body.name, body.startVoltage, body.success, body.timestamps),
-                body.startVoltage
-            );
+
+            const capacity = await dbTestsQueries.logTest(req.query["battery-id"], body.time, body.name, body.startVoltage, body.success, body.timestamps);
+
+            if(capacity > dbTestsQueries.MIN_START_VOLTAGE)
+                return await dbBatteryQueries.setBatteryCapacity(
+                    req.query["battery-id"], 
+                    capacity,
+                    body.startVoltage
+                );
         },
         "/note" : req => {
             const body = req.body;
