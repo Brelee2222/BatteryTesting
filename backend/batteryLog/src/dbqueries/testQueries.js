@@ -41,11 +41,11 @@ function insertTimestamp(testId, time, voltage, current) {
 // MUST BE SORTED IN ACENDING ORDER
 const DEGREES = 3;
 const estimation_degrees = [];
+const model = createModel();
 for(let degree = 0; degree <= DEGREES; degree++)
     estimation_degrees.push(degree);
 
 function computeCapacity(timestamps) {
-    const model = createModel();
 
     model.fit(timestamps.map(timestamp => [timestamp.time / 60 / 60 / 1000, timestamp.voltage * timestamp.current]), estimation_degrees);
 

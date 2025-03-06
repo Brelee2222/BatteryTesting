@@ -20,8 +20,6 @@ function getMatch(eventKey, matchKey, batteryId) {
     return database.execute(`SELECT * FROM ${MATCHES_TABLE} WHERE eventKey=?, matchKey=?, batteryId=?;`, [eventKey, matchKey, batteryId], result => result[0]);
 }
 
-
-
 async function recordMatch(eventKey, matchKey, batteryId, teamNumber, time, voltageHigh, voltageLow, note) {
     await recordNote(batteryId, time, note);
 
