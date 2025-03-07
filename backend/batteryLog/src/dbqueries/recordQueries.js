@@ -1,10 +1,9 @@
 const database = require("../database.js");
-const matchTBA = require("../matches.js");
 
 const NOTES_TABLE = "Battery_Notes";
 const MATCHES_TABLE = "Matches"
 
-function getNotesFromBattery(batteryId) {
+function getBatteryNotes(batteryId) {
     return database.execute(`SELECT time, note FROM ${NOTES_TABLE} WHERE batteryId=?;`, [batteryId], result => ({notes : result, length : result.length}));
 }
 
@@ -27,7 +26,7 @@ async function recordMatch(eventKey, matchKey, batteryId, teamNumber, time, volt
 } 
 
 module.exports = {
-    getNotesFromBattery,
+    getBatteryNotes,
     recordNote,
     removeNote,
     recordMatch
