@@ -6,14 +6,14 @@ function getBattery(batteryId) {
     // if(batteryId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`SELECT * FROM ${BATTERIES_TABLES} WHERE id=?;`, [batteryId], result => result[0]);
+    return database.execute(`call getBattery(?);`, [batteryId], result => result[0]);
 }
 
 async function addBattery(name, date, description) {
     if(typeof name != "string" || typeof date != "string" || typeof description != "string")
         return Error("Invalid Data");
 
-    await database.execute(`INSERT INTO ${BATTERIES_TABLES} (name, date, description) VALUES(?, DATE(?), ?);`, [name, date, description], () => {});
+    await database.execute(`call createBattery(?, ?, ?);`, [name, date, description], () => {});
     return await await database.execute(`SELECT id, name, date, description FROM ${BATTERIES_TABLES} WHERE name=?;`, [name], result => result[0]);
 }
 
