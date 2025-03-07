@@ -13,8 +13,7 @@ async function addBattery(name, date, description) {
     if(typeof name != "string" || typeof date != "string" || typeof description != "string")
         return Error("Invalid Data");
 
-    await database.execute(`call createBattery(?, ?, ?);`, [name, date, description], () => {});
-    return await await database.execute(`SELECT id, name, date, description FROM ${BATTERIES_TABLES} WHERE name=?;`, [name], result => result[0]);
+    return await getBattery(await database.execute(`call createBattery(?, ?, ?);`, [name, date, description], result => result[0][0].id));
 }
 
 async function editBattery(id, name, date, description) {
@@ -31,7 +30,7 @@ function removeBattery(id) {
 }
 
 function getBatteries() {
-    return database.execute(`SELECT id, name, capacity, startVoltage, date FROM ${BATTERIES_TABLES};`, [], result => ({batteries : result, length : result.length}));
+    return database.execute(`call getBatteries();`, [], result => ({batteries : result[0], length : result[0].length}));
     // return database.query(`SELECT id, name, date FROM ${BATTERIES_TABLES};`, result => JSON.stringify({batteries : result, length : result.length}));
 }
 

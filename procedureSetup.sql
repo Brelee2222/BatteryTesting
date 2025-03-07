@@ -21,7 +21,7 @@ BEGIN
     INTO Batteries (name, date, description) 
     VALUES(name, DATE(date), description);
 
-    SELECT LAST_INSERT_ID();
+    SELECT LAST_INSERT_ID() as id;
 END$$
 
 CREATE PROCEDURE editBattery(batteryId INT UNSIGNED, name VARCHAR(50), date DATE, description VARCHAR(255))
