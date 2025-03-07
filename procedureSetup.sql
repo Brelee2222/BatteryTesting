@@ -140,7 +140,7 @@ CREATE PROCEDURE getEventMatches(batteryId INT UNSIGNED, eventKey VARCHAR(31))
 BEGIN
     SELECT matchKey, teamNumber, time, voltageHigh, voltageLow
     FROM Matches
-    WHERE Matches.batteryId = batteryId, Matches.eventKey = eventKey;
+    WHERE Matches.batteryId = batteryId AND Matches.eventKey = eventKey;
 END$$
 
 CREATE PROCEDURE getBatteryMatches(batteryId INT UNSIGNED)
@@ -154,7 +154,7 @@ CREATE PROCEDURE getMatch(batteryId INT UNSIGNED, eventKey VARCHAR(31), matchKey
 BEGIN
     SELECT *
     FROM Matches
-    WHERE Matches.eventKey = eventKey, Matches.matchKey = matchKey, Matches.batteryId = batteryId
+    WHERE Matches.eventKey = eventKey AND Matches.matchKey = matchKey AND Matches.batteryId = batteryId
     LIMIT 1;
 END$$
 
@@ -162,7 +162,7 @@ CREATE PROCEDURE deleteMatch(batteryId INT UNSIGNED, eventKey VARCHAR(31), match
 BEGIN
     DELETE
     FROM Matches
-    WHERE Matches.eventKey = eventKey, Matches.matchKey = matchKey, Matches.batteryId = batteryId
+    WHERE Matches.eventKey = eventKey AND Matches.matchKey = matchKey AND Matches.batteryId = batteryId
     LIMIT 1;
 END$$
 
