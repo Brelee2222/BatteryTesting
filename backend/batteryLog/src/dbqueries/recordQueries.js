@@ -1,7 +1,7 @@
 const database = require("../database.js");
 
-const NOTES_TABLE = "Battery_Notes";
-const MATCHES_TABLE = "Matches"
+// const NOTES_TABLE = "Battery_Notes";
+// const MATCHES_TABLE = "Matches"
 
 function getBatteryNotes(batteryId) {
     return database.execute(`SELECT time, note FROM ${NOTES_TABLE} WHERE batteryId=?;`, [batteryId], result => ({notes : result, length : result.length}));

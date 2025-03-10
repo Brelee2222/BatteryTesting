@@ -1,6 +1,6 @@
 const database = require("../database.js");
 
-const BATTERIES_TABLES = "Batteries";
+// const BATTERIES_TABLES = "Batteries";
 
 function getBattery(batteryId) {
     // if(batteryId == undefined)
@@ -26,7 +26,7 @@ function removeBattery(id) {
     // if(id == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`DELETE FROM ${BATTERIES_TABLES} WHERE id=?;`, [id], () => id);
+    return database.execute(`call deleteBattery(?);`, [id], () => id);
 }
 
 function getBatteries() {
@@ -44,7 +44,7 @@ function getBatteryDates() {
 }
 
 function setBatteryCapacity(id, capacity, startVoltage) {    
-    return database.execute(`UPDATE ${BATTERIES_TABLES} SET capacity = ?, startVoltage = ? WHERE id = ?`, [capacity, startVoltage, id], () => "Success");
+    return database.execute(`setCapacity(?, ?, ?);`, [id, capacity, startVoltage], () => "Success");
 }
 
 module.exports = {

@@ -1,8 +1,8 @@
 const database = require("../database.js");
 const { createModel } = require('polynomial-regression');
 
-const TESTS_TABLE = "Tests";
-const TIMESTAMPS_TABLE = "Timestamps";
+// const TESTS_TABLE = "Tests";
+// const TIMESTAMPS_TABLE = "Timestamps";
 const CODE_VERSION = 1;
 const MIN_START_VOLTAGE = 12.8;
 
@@ -10,25 +10,25 @@ function getBatteryTests(batteryId) {
     // if(batteryId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`SELECT * FROM ${TESTS_TABLE} WHERE batteryId=?;`, [batteryId], result => ({tests : result, length : result.length}));
+    return database.execute(`call getBatteryTests(?);`, [batteryId], result => ({tests : result, length : result.length}));
 }
 
 function getTest(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`SELECT batteryId, startTime, name, success, capacity, codeVersion, startVoltage, duration, (SELECT MIN(voltage) FROM ${TIMESTAMPS_TABLE} WHERE testId=?) AS minVoltage, (SELECT MAX(voltage) FROM ${TIMESTAMPS_TABLE} WHERE testId=?) AS maxVoltage, (SELECT MIN(current) FROM ${TIMESTAMPS_TABLE} WHERE testId=?) AS minCurrent, (SELECT MAX(current) FROM ${TIMESTAMPS_TABLE} WHERE testId=?) AS maxCurrent FROM ${TESTS_TABLE} WHERE startTime=?;`, [testId, testId, testId, testId, testId], result => result[0]);
+    return database.execute(`call getTest(?)`, [testId], result => result[0]);
 }
 
-function removeTest(testId) {
-    return database.execute(`DELETE FROM ${TESTS_TABLE} WHERE id=?;`, [testId], () => testId);
+function deleteTest(testId) {
+    return database.execute(`call deleteTest(?);`, [testId], () => testId);
 }
 
 function getTimestamps(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`SELECT * FROM ${TIMESTAMPS_TABLE} WHERE testId=?;`, [testId], result => ({timestamps : result, length : result.length}));
+    return database.execute(`call getTimestamps(?);`, [testId], result => ({timestamps : result, length : result.length}));
 }
 
 function insertTimestamp(testId, time, voltage, current) {
