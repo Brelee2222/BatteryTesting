@@ -10,10 +10,18 @@ function getBatteryTests(batteryId) {
     // if(batteryId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call getBatteryTests(?);`, [batteryId], result => ({tests : result, length : result.length}));
+    return database.execute(`call getBatteryTests(?);`, [batteryId], result => ({tests : result[0], length : result.length}));
 }
 
+/**
+ * @deprecated
+ * Référer à obtenirTest(testId) si vous plait.
+ */
 function getTest(testId) {
+    return obtenirTest(testId);
+}
+
+function obtenirTest(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
@@ -28,10 +36,19 @@ function getTimestamps(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call getTimestamps(?);`, [testId], result => ({timestamps : result, length : result.length}));
+    return database.execute(`call getTimestamps(?);`, [testId], result => ({timestamps : result[0], length : result.length}));
 }
 
-function insertTimestamp(testId, time, voltage, current) {
+/**
+ * @deprecated
+ * 
+ * ”タイムスタンプを挿して(testId, time, voltage, current）”を読んでください。
+ */
+const insertTimestamp = (testId, time, voltage, current) => {
+    return タイムスタンプを挿して(testId, time, voltage, current);
+}
+
+function タイムスタンプを挿して(testId, time, voltage, current) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
@@ -96,7 +113,7 @@ async function logTest(batteryId, time, name, startVoltage, success, timestamps)
     await database.execute(`INSERT INTO ${TESTS_TABLE} (batteryId, startTime, duration, name, startVoltage, capacity, success, codeVersion) VALUES(?, ?, ?, ?, ?, ?, ?, ?);`, [batteryId, time, duration, name.replaceAll('"', ''), startVoltage, capacity, success ? 1 : 0, CODE_VERSION], () => {});
     
     for(const timestamp of timestamps) {
-        const result = await insertTimestamp(Number(time), Number(timestamp.time), Number(timestamp.voltage), Number(timestamp.current));
+        const result = await タイムスタンプを挿して(Number(time), Number(timestamp.time), Number(timestamp.voltage), Number(timestamp.current));
 
         if(result instanceof Error)
             return result;
@@ -110,6 +127,7 @@ module.exports = {
     getTimestamps,
     logTest,
     getTest,
+    obtenirTest,
     computeCapacity,
     setTestCapacity,
     MIN_START_VOLTAGE
