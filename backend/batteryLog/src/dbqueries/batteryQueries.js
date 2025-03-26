@@ -6,19 +6,19 @@ function getBattery(batteryId) {
     // if(batteryId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call getBattery(?);`, [batteryId], result => result[0][0]);
+    return database.call(`getBattery(?);`, [batteryId], result => result[0]);
 }
 
 async function addBattery(name, date, description) {
     if(typeof name != "string" || typeof date != "string" || typeof description != "string")
         return Error("Invalid Data");
 
-    return await getBattery(await database.execute(`call createBattery(?, ?, ?);`, [name, date, description], result => result[0][0].id));
+    return await getBattery(await database.call(`createBattery(?, ?, ?);`, [name, date, description], result => result[0][0].id));
 }
 
 async function editBattery(id, name, date, description) {
-    await database.execute(`call editBattery(?, ?, ?, ?)`, [id, name, String(date), description], () => {});
-    return await database.execute(`call getBattery(?);`, [id], result => result[0][0]);
+    await database.call(`editBattery(?, ?, ?, ?)`, [id, name, String(date), description], () => {});
+    return await database.call(`getBattery(?);`, [id], result => result[0]);
 }
 
 // Might not work due to foreign keys
@@ -26,11 +26,11 @@ function removeBattery(id) {
     // if(id == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call deleteBattery(?);`, [id], () => id);
+    return database.call(`deleteBattery(?);`, [id], () => id[0]);
 }
 
 function getBatteries() {
-    return database.execute(`call getBatteries();`, [], result => ({batteries : result[0], length : result[0].length}));
+    return database.call(`getBatteries();`, [], result => ({batteries : result[0], length : result[0].length}));
     // return database.query(`SELECT id, name, date FROM ${BATTERIES_TABLES};`, result => JSON.stringify({batteries : result, length : result.length}));
 }
 

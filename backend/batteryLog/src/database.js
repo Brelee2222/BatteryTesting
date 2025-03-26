@@ -26,5 +26,12 @@ module.exports = {
 
       res(success(result));
     }));
+  },
+  call : async function(query, userInput, success) {
+    return new Promise(res => connection.execute(`call ${query}`, userInput, (error, result) => {
+      if(error) throw error;
+
+      res(success(result[0]));
+    }));
   }
 };

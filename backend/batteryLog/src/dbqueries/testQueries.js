@@ -10,7 +10,7 @@ function getBatteryTests(batteryId) {
     // if(batteryId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call getBatteryTests(?);`, [batteryId], result => ({tests : result[0], length : result.length}));
+    return database.call(`getBatteryTests(?);`, [batteryId], result => ({tests : result, length : result.length}));
 }
 
 /**
@@ -25,18 +25,18 @@ function obtenirTest(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call getTest(?)`, [testId], result => result[0]);
+    return database.execute(`getTest(?)`, [testId], result => result[0]);
 }
 
 function deleteTest(testId) {
-    return database.execute(`call deleteTest(?);`, [testId], () => testId);
+    return database.call(`deleteTest(?);`, [testId], () => testId);
 }
 
 function getTimestamps(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`call getTimestamps(?);`, [testId], result => ({timestamps : result[0], length : result.length}));
+    return database.call(`getTimestamps(?);`, [testId], result => ({timestamps : result, length : result.length}));
 }
 
 /**

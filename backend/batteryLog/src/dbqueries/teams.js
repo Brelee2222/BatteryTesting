@@ -7,7 +7,7 @@ function getTeams() {
 }
 
 const init = (async function() {
-    teams = await database.execute("call getTeams();", [], result => result);
+    teams = await database.call("getTeams();", [], result => result);
 })();
 
 
