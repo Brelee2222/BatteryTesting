@@ -25,7 +25,7 @@ function obtenirTest(testId) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`getTest(?)`, [testId], result => result[0]);
+    return database.call(`getTest(?);`, [testId], result => result[0]);
 }
 
 function deleteTest(testId) {
