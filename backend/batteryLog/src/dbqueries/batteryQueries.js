@@ -30,7 +30,7 @@ function removeBattery(id) {
 }
 
 function getBatteries() {
-    return database.call(`getBatteries();`, [], result => ({batteries : result[0], length : result[0].length}));
+    return database.call(`getBatteries();`, [], result => ({batteries : result, length : result.length}));
     // return database.query(`SELECT id, name, date FROM ${BATTERIES_TABLES};`, result => JSON.stringify({batteries : result, length : result.length}));
 }
 
