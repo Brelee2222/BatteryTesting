@@ -52,7 +52,7 @@ function タイムスタンプを挿して(testId, time, voltage, current) {
     // if(testId == undefined)
     //     return Error("Invalid Data");
 
-    return database.execute(`INSERT INTO ${TIMESTAMPS_TABLE} (testId, time, voltage, current) VALUES(?, ?, ?, ?)`, [testId, time, voltage, current], () => time);
+    return database.call(`insertTimestamp(?, ?, ?, ?);`, [testId, time, voltage, current], () => time);
 }
 
 // MUST BE SORTED IN ACENDING ORDER
@@ -74,15 +74,11 @@ function computeCapacity(timestamps) {
         lastEst = est;
     }
 
-    // console.log(coefficients);
-
     // get area under curve
     const lastTime = timestamps[timestamps.length-1].time / 60 / 60 / 1000;
     let result = 0;
     for(let degree = 0; degree <= DEGREES; degree++)
         result += (coefficients[degree] * Math.pow(lastTime, degree + 1)) / (degree + 1);
-
-    // console.log(result)
 
     return isNaN(result) ? 0 : result;
     // let lastTime = 0;
@@ -100,7 +96,7 @@ function computeCapacity(timestamps) {
 }
 
 async function setTestCapacity(id, capacity) {
-    return database.execute(`UPDATE ${TESTS_TABLE} SET capacity = ? WHERE startTime = ?`, [capacity, id], () => "Success");
+    return database.call(`setTestCapacity(?, ?);`, [id, capacity], () => "Success");
 }
 
 async function logTest(batteryId, time, name, startVoltage, success, timestamps) {
@@ -110,7 +106,7 @@ async function logTest(batteryId, time, name, startVoltage, success, timestamps)
 
     const capacity = computeCapacity(timestamps);
 
-    await database.execute(`INSERT INTO ${TESTS_TABLE} (batteryId, startTime, duration, name, startVoltage, capacity, success, codeVersion) VALUES(?, ?, ?, ?, ?, ?, ?, ?);`, [batteryId, time, duration, name.replaceAll('"', ''), startVoltage, capacity, success ? 1 : 0, CODE_VERSION], () => {});
+    await database.call(`recordTest(?, ?, ?, ?, ?, ?, ?, ?);`, [batteryId, time, duration, name.replaceAll('"', ''), startVoltage, capacity, success ? 1 : 0, CODE_VERSION], () => {});
     
     for(const timestamp of timestamps) {
         const result = await タイムスタンプを挿して(Number(time), Number(timestamp.time), Number(timestamp.voltage), Number(timestamp.current));
