@@ -5,6 +5,7 @@ CREATE TABLE Batteries (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     date DATE NOT NULL, -- Manufacture Date
+    manufacturer VARCHAR(25),
     description VARCHAR(255) NOT NULL,
 
     -- Test data
