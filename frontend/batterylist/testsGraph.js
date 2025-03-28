@@ -36,7 +36,7 @@ function testToPoint(test) {
 }
 
 export async function drawTests() {
-    const tests = (await loadTests()).filter(test => test.startTime >= dateFro && test.startTime <= dateTo);
+    const tests = getTests().filter(test => test.startTime >= dateFro && test.startTime <= dateTo);
 
     graphContext.lineWidth = TEST_LINE_WIDTH;
     graphContext.moveTo(AXIS_PADDING, AXIS_PADDING);
