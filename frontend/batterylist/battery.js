@@ -1,5 +1,7 @@
 import { batteryInit, getBatteries, selectBattery, loadBattery } from "../utils/battery.js";
+import { getTests } from "../utils/test.js";
 import { showNotes } from "./notes.js";
+import { changeDateRange } from "./testsGraph.js";
 
 (async function() {
     await batteryInit;
@@ -49,7 +51,9 @@ async function switchBattery(batteryId) {
     if(_batteryId == batteryId)
         return;
 
-    selectBattery(_batteryId = batteryId);
+    await selectBattery(_batteryId = batteryId);
+    const testTimes = getTests().map(test => test.startTime);
+    changeDateRange(Math.min(...testTimes), Math.max(...testTimes));
 
     const battery = await loadBattery();
 
