@@ -84,8 +84,8 @@ export async function drawTests() {
 }
 
 export function changeDateRange(from, to) {
-    dateFro = from;
-    dateTo = to;
+    testValueScale.minX = from;
+    testValueScale.maxX = to;
 } 
 
 drawAxes();
