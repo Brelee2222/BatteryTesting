@@ -35,8 +35,8 @@ const canvasScale = {
 const graphScale = {
     minX : AXIS_PADDING,
     minY : AXIS_PADDING,
-    maxX : canvasDimensions.maxX - AXIS_PADDING,
-    maxY : canvasDimensions.maxY - AXIS_PADDING
+    maxX : canvasScale.maxX - AXIS_PADDING,
+    maxY : canvasScale.maxY - AXIS_PADDING
 };
 
 /**
@@ -75,7 +75,7 @@ function testToPoint(test) {
 }
 
 export async function drawTests() {
-    const tests = getTests().filter(test => test.startTime >= dateFro && test.startTime <= dateTo);
+    const tests = getTests().filter(test => test.startTime >= testValueScale.minX && test.startTime <= testValueScale.maxX);
 
     graphContext.lineWidth = TEST_LINE_WIDTH;
     graphContext.moveTo(AXIS_PADDING, AXIS_PADDING);
