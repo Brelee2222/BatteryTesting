@@ -68,7 +68,7 @@ function transferScale(point, fromScale, toScale) {
 function testToPoint(test) {
     return transferScale({
         x : test.startTime,
-        y : testValueScale.maxY - test.capacity
+        y : testValueScale.maxY - (test.capacity - testValueScale.minY)
     },
     testValueScale,
     graphScale);
