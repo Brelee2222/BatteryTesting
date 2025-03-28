@@ -88,3 +88,8 @@ button {
     font-size: inherit;
     font-family: inherit;
 }
+
+#testsGraph {
+    width : 100%;
+    aspect-ratio: 3;
+}
