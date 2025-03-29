@@ -117,6 +117,7 @@ class TestGraph {
         graphContext.moveTo(graphScale.minX, graphScale.minY);
         graphContext.lineTo(graphScale.minX, graphScale.maxY);
         graphContext.lineTo(graphScale.maxX, graphScale.maxY);
+        graphContext.stroke();
     }
 
     transferScale(point) {
@@ -166,12 +167,11 @@ class TestGraph {
             
             graphContext.strokeStyle = gradient;
 
-            graphContext.lineTo(testPoint.x, testPoint.y)
+            graphContext.lineTo(testPoint.x, testPoint.y);
+            graphContext.stroke();
 
             lastPoint = testPoint;
         });
-        
-        graphContext.stroke();
     }
 }
 
