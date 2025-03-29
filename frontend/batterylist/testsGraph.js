@@ -143,7 +143,7 @@ class TestGraph {
 
     
         testPoints.forEach(testPoint => {
-            const gradient = ctx.createLinearGradient(lastPoint.point.x, lastPoint.point.y, testPoint.point.x, testPoint.point.y);
+            const gradient = graphContext.createLinearGradient(lastPoint.point.x, lastPoint.point.y, testPoint.point.x, testPoint.point.y);
 
             const voltDiff = lastPoint.startVoltage - testPoint.startVoltage;
 
