@@ -119,11 +119,15 @@ class TestGraph {
 
         graphContext.reset();
 
+        this.drawAxes();
+
         graphContext.lineWidth = TEST_LINE_WIDTH;
     
         const testPoints = tests.filter(test => 
             test.startTime >= testDateScale.minX && test.startTime <= testDateScale.maxX
         );
+
+        console.log(testPoints);
     
         graphContext.moveTo(AXIS_PADDING, AXIS_PADDING);
     
