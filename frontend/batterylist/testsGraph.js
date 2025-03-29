@@ -3,9 +3,14 @@ import { getTests } from "../utils/test.js";
 // Values for generating axes
 const AXIS_PADDING = 20;
 const AXIS_WIDTH = 5;
+const AXIS_COLOR = "black";
 
 // Values for generating and connecting points
 const TEST_LINE_WIDTH = 2;
+
+const LOW_VOLTAGE_COLOR = "#FF0000";
+const HIGH_VOLTAGE_COLOR = "#00FF00";
+
 
 /**
  * @typedef Scale Graph dimensions
@@ -54,11 +59,11 @@ class TestGraph {
      */
     graphScale;
 
-    testsToPoints;
+    testToPoint;
 
-    constructor(canvasId, scale, testsToPoints) {
+    constructor(canvasId, scale, testToPoint) {
         this.graphContext = document.getElementById(canvasId).getContext("2d");
-        this.testsToPoints = testsToPoints;
+        this.testToPoint = testToPoint;
 
         this.scale = scale;
 
@@ -99,19 +104,20 @@ class TestGraph {
         const graphScale = this.getGraphScale();
         
         graphContext.lineWidth = AXIS_WIDTH;
+        graphContext.strokeStyle = AXIS_COLOR;
         graphContext.moveTo(graphScale.minX, graphScale.minY);
         graphContext.lineTo(graphScale.minX, graphScale.maxY);
         graphContext.lineTo(graphScale.maxX, graphScale.maxY);
     }
 
-    transferScale(points) {
+    transferScale(point) {
         const scale = this.getScale();
         const graphScale = this.getGraphScale();
 
-        return points.map(point => ({
+        return {
             x : (point.x - scale.minX) / (scale.maxX - scale.minX) * (graphScale.maxX - graphScale.minX) + graphScale.minX,
             y : (point.y - scale.minY) / (scale.maxY - scale.minY) * (graphScale.maxY - graphScale.minY) + graphScale.minY
-        }));
+        };
     }
 
     async displayTests(tests) {
@@ -123,28 +129,44 @@ class TestGraph {
 
         graphContext.lineWidth = TEST_LINE_WIDTH;
     
-        const testPoints = this.transferScale(
-            this.testsToPoints(
-                tests.filter(test => 
-                    test.startTime >= testDateScale.minX && test.startTime <= testDateScale.maxX
-                )
-            )
-        );
+        const testPoints = 
+            tests.filter(test => 
+                test.startTime >= testDateScale.minX && test.startTime <= testDateScale.maxX
+            ).map(test => ({startVoltage : test.startVoltage, point : this.testToPoint(test)})).sort((a, b) => a.point.x - b.point.x);
+        
+        testPoints.forEach(test => test.point = this.transferScale(test.point));
     
-        const startPoint = testPoints.shift();
-        graphContext.moveTo(startPoint.x, startPoint.y);
+
+        let lastPoint = testPoints.shift();
+        
+        graphContext.moveTo(lastPoint.point.x, lastPoint.point.y);
+
     
-        testPoints.forEach(testPoint => graphContext.lineTo(testPoint.x, testPoint.y));
+        testPoints.forEach(testPoint => {
+            const gradient = ctx.createLinearGradient(lastPoint.point.x, lastPoint.point.y, testPoint.point.x, testPoint.point.y);
+
+            const voltDiff = lastPoint.startVoltage - testPoint.startVoltage;
+
+            
+            gradient.addColorStop((testVoltageScale.maxX-lastPoint.startVoltage) / voltDiff, LOW_VOLTAGE_COLOR);
+            gradient.addColorStop((testVoltageScale.minX-testPoint.startVoltage) / voltDiff, HIGH_VOLTAGE_COLOR);
+
+            graphContext.strokeStyle = gradient;
+
+            graphContext.lineTo(testPoint.x, testPoint.y)
+
+            lastPoint = testPoint;
+        });
         
         graphContext.stroke();
     }
 }
 
 const graphs = [
-    new TestGraph("voltageGraph", testVoltageScale, tests => tests.map(test => ({
+    new TestGraph("voltageGraph", testVoltageScale, test => ({
         x : test.startVoltage,
         y : test.capacity
-    })))
+    }))
 ];
 
 export function changeDateRange(from, to) {
