@@ -139,7 +139,7 @@ class TestGraph {
 
 const graphs = [
     new TestGraph("voltageGraph", testVoltageScale, tests => tests.map(test => ({
-        x : test.startingVoltage,
+        x : test.startVoltage,
         y : test.capacity
     })))
 ];
