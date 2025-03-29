@@ -164,7 +164,7 @@ class TestGraph {
             
             graphContext.strokeStyle = gradient;
 
-            graphContext.lineTo(testPoint.x, testPoint.y);
+            graphContext.lineTo(testPoint.point.x, testPoint.point.y);
             graphContext.stroke();
 
             lastPoint = testPoint;
