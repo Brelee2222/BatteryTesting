@@ -134,10 +134,10 @@ class TestGraph {
 }
 
 const graphs = [
-    new TestGraph("voltageGraph", testVoltageScale, test => ({
+    new TestGraph("voltageGraph", testVoltageScale, tests => tests.map(test => ({
         x : test.startingVoltage,
         y : test.capacity
-    }))
+    })))
 ];
 
 export function changeDateRange(from, to) {
