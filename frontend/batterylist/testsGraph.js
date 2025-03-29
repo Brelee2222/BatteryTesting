@@ -147,12 +147,9 @@ class TestGraph {
                 
                 return {
                     color : `rgb(${multiplier * (HIGH_VOLTAGE_COLOR.r - LOW_VOLTAGE_COLOR.r) + LOW_VOLTAGE_COLOR.r} ${multiplier * (HIGH_VOLTAGE_COLOR.g - LOW_VOLTAGE_COLOR.g) + LOW_VOLTAGE_COLOR.g} ${multiplier * (HIGH_VOLTAGE_COLOR.b - LOW_VOLTAGE_COLOR.b) + LOW_VOLTAGE_COLOR.b})`, 
-                    point : this.testToPoint(test)
+                    point : this.transferScale(this.testToPoint(test))
                 }
-            }).sort((a, b) => a.point.x - b.point.x);
-        
-        testPoints.forEach(test => test.point = this.transferScale(test.point));
-    
+            }).sort((a, b) => a.point.x - b.point.x);    
 
         let lastPoint = testPoints.shift();
         
