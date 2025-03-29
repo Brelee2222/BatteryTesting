@@ -65,15 +65,15 @@ class TestGraph {
         this.canvasScale = {
             minX : 0,
             minY : 0,
-            maxX : graphContext.canvas.width,
-            maxY : graphContext.canvas.height
+            maxX : this.graphContext.canvas.width,
+            maxY : this.graphContext.canvas.height
         };
 
         this.graphScale = {
             minX : AXIS_PADDING,
             minY : AXIS_PADDING,
-            maxX : canvasScale.maxX - AXIS_PADDING,
-            maxY : canvasScale.maxY - AXIS_PADDING
+            maxX : this.canvasScale.maxX - AXIS_PADDING,
+            maxY : this.canvasScale.maxY - AXIS_PADDING
         };
     }
 
