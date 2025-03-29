@@ -89,7 +89,7 @@ button {
     font-family: inherit;
 }
 
-#testsGraph {
+#voltageGraph {
     width : 100%;
     aspect-ratio: 3;
 }
