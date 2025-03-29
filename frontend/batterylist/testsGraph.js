@@ -20,9 +20,9 @@ const TEST_LINE_WIDTH = 2;
  * @type {Scale}
  */
 const testVoltageScale = {
-    minX : 0,
+    minX : 14,
     minY : 0,
-    maxX : 14,
+    maxX : 0,
     maxY : 90
 };
 
@@ -123,15 +123,18 @@ class TestGraph {
 
         graphContext.lineWidth = TEST_LINE_WIDTH;
     
-        const testPoints = tests.filter(test => 
-            test.startTime >= testDateScale.minX && test.startTime <= testDateScale.maxX
+        const testPoints = this.transferScale(
+            this.testsToPoints(
+                tests.filter(test => 
+                    test.startTime >= testDateScale.minX && test.startTime <= testDateScale.maxX
+                )
+            )
         );
-
-        console.log(testPoints);
     
-        graphContext.moveTo(AXIS_PADDING, AXIS_PADDING);
+        const startPoint = testPoints.unshift();
+        graphContext.moveTo(startPoint.x, startPoint.y);
     
-        this.transferScale(this.testsToPoints(testPoints)).forEach(testPoint => graphContext.lineTo(testPoint.x, testPoint.y));
+        testPoints.forEach(testPoint => graphContext.lineTo(testPoint.x, testPoint.y));
         
         graphContext.stroke();
     }
