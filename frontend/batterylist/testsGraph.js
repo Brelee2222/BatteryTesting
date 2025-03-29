@@ -21,9 +21,9 @@ const TEST_LINE_WIDTH = 2;
  */
 const testVoltageScale = {
     minX : 14,
-    minY : 0,
+    minY : 90,
     maxX : 0,
-    maxY : 90
+    maxY : 0
 };
 
 /**
@@ -31,9 +31,9 @@ const testVoltageScale = {
  */
 const testDateScale = {
     minX : 0,
-    minY : 0,
+    minY : 90,
     maxX : 0,
-    maxY : 90
+    maxY : 0
 };
 
 class TestGraph {
