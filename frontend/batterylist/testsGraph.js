@@ -131,7 +131,7 @@ class TestGraph {
             )
         );
     
-        const startPoint = testPoints.unshift();
+        const startPoint = testPoints.shift();
         graphContext.moveTo(startPoint.x, startPoint.y);
     
         testPoints.forEach(testPoint => graphContext.lineTo(testPoint.x, testPoint.y));
