@@ -112,11 +112,16 @@ class TestGraph {
         const graphContext = this.getContext();
         const graphScale = this.getGraphScale();
         
+        graphContext.beginPath();
+
         graphContext.lineWidth = AXIS_WIDTH;
         graphContext.strokeStyle = AXIS_COLOR;
         graphContext.moveTo(graphScale.minX, graphScale.minY);
         graphContext.lineTo(graphScale.minX, graphScale.maxY);
         graphContext.lineTo(graphScale.maxX, graphScale.maxY);
+
+        graphContext.closePath();
+
         graphContext.stroke();
     }
 
@@ -164,7 +169,12 @@ class TestGraph {
             
             graphContext.strokeStyle = gradient;
 
+            graphContext.beginPath();
+
             graphContext.lineTo(testPoint.point.x, testPoint.point.y);
+
+            graphContext.closePath();
+            
             graphContext.stroke();
 
             lastPoint = testPoint;
