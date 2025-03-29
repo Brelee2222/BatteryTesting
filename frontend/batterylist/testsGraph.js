@@ -8,8 +8,17 @@ const AXIS_COLOR = "black";
 // Values for generating and connecting points
 const TEST_LINE_WIDTH = 2;
 
-const LOW_VOLTAGE_COLOR = "#FF0000";
-const HIGH_VOLTAGE_COLOR = "#00FF00";
+const LOW_VOLTAGE_COLOR = {
+    r : 255,
+    g : 0,
+    b : 0
+};
+
+const HIGH_VOLTAGE_COLOR = {
+    r : 0,
+    g : 255,
+    b : 0
+};
 
 
 /**
@@ -132,7 +141,14 @@ class TestGraph {
         const testPoints = 
             tests.filter(test => 
                 test.startTime >= testDateScale.minX && test.startTime <= testDateScale.maxX
-            ).map(test => ({startVoltage : test.startVoltage, point : this.testToPoint(test)})).sort((a, b) => a.point.x - b.point.x);
+            ).map(test => {
+                const multiplier = (test.startVoltage - testVoltageScale.minX) / (testVoltageScale.maxX - testVoltageScale.minX);
+                
+                return {
+                    color : `rgb(${multiplier * (HIGH_VOLTAGE_COLOR.r - LOW_VOLTAGE_COLOR.r) + LOW_VOLTAGE_COLOR.r} ${multiplier * (HIGH_VOLTAGE_COLOR.g - LOW_VOLTAGE_COLOR.g) + LOW_VOLTAGE_COLOR.g} ${multiplier * (HIGH_VOLTAGE_COLOR.b - LOW_VOLTAGE_COLOR.b) + LOW_VOLTAGE_COLOR.b})`, 
+                    point : this.testToPoint(test)
+                }
+            }).sort((a, b) => a.point.x - b.point.x);
         
         testPoints.forEach(test => test.point = this.transferScale(test.point));
     
@@ -144,13 +160,10 @@ class TestGraph {
     
         testPoints.forEach(testPoint => {
             const gradient = graphContext.createLinearGradient(lastPoint.point.x, lastPoint.point.y, testPoint.point.x, testPoint.point.y);
-
-            const voltDiff = lastPoint.startVoltage - testPoint.startVoltage;
-
             
-            gradient.addColorStop((testVoltageScale.maxX-lastPoint.startVoltage) / voltDiff, LOW_VOLTAGE_COLOR);
-            gradient.addColorStop((testVoltageScale.minX-testPoint.startVoltage) / voltDiff, HIGH_VOLTAGE_COLOR);
-
+            gradient.addColorStop(0, lastPoint.color);
+            gradient.addColorStop(1, testPoint.color);
+            
             graphContext.strokeStyle = gradient;
 
             graphContext.lineTo(testPoint.x, testPoint.y)
