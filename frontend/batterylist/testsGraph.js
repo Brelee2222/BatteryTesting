@@ -19,26 +19,6 @@ const TEST_LINE_WIDTH = 2;
 /**
  * @type {Scale}
  */
-const canvasScale = {
-    minX : 0,
-    minY : 0,
-    maxX : graphContext.canvas.width,
-    maxY : graphContext.canvas.height
-};
-
-/**
- * @type {Scale}
- */
-const graphScale = {
-    minX : AXIS_PADDING,
-    minY : AXIS_PADDING,
-    maxX : canvasScale.maxX - AXIS_PADDING,
-    maxY : canvasScale.maxY - AXIS_PADDING
-};
-
-/**
- * @type {Scale}
- */
 const testVoltageScale = {
     minX : 0,
     minY : 0,
@@ -58,14 +38,43 @@ const testDateScale = {
 
 class TestGraph {
     graphContext;
+
+    /**
+     * @type {Scale}
+     */
     scale;
+
+    /**
+     * @type {Scale}
+     */
+    canvasScale;
+
+    /**
+     * @type {Scale}
+     */
+    graphScale;
 
     testsToPoints;
 
     constructor(canvasId, scale, testsToPoints) {
-        this.scale = scale;
         this.graphContext = document.getElementById(canvasId).getContext("2d");
         this.testsToPoints = testsToPoints;
+
+        this.scale = scale;
+
+        this.canvasScale = {
+            minX : 0,
+            minY : 0,
+            maxX : graphContext.canvas.width,
+            maxY : graphContext.canvas.height
+        };
+
+        this.graphScale = {
+            minX : AXIS_PADDING,
+            minY : AXIS_PADDING,
+            maxX : canvasScale.maxX - AXIS_PADDING,
+            maxY : canvasScale.maxY - AXIS_PADDING
+        };
     }
 
     getContext() {
@@ -76,9 +85,18 @@ class TestGraph {
         return this.scale;
     }
 
+    getCanvasScale() {
+        return this.canvasScale;
+    }
+
+    getGraphScale() {
+        return this.graphScale;
+    }
+
     // draw graph axes
     drawAxes() {
         const graphContext = this.getContext();
+        const graphScale = this.getGraphScale();
         
         graphContext.lineWidth = AXIS_WIDTH;
         graphContext.moveTo(graphScale.minX, graphScale.minY);
@@ -88,6 +106,7 @@ class TestGraph {
 
     transferScale(points) {
         const scale = this.getScale();
+        const graphScale = this.getGraphScale();
 
         return points.map(point => ({
             x : (point.x - scale.minX) / (scale.maxX - scale.minX) * (graphScale.maxX - graphScale.minX) + graphScale.minX,
