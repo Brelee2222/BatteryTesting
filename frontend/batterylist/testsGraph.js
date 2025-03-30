@@ -36,7 +36,7 @@ const HIGH_VOLTAGE_COLOR = {
 const testVoltageScale = {
     minX : 14,
     minY : 90,
-    maxX : 0,
+    maxX : 10,
     maxY : 0
 };
 
