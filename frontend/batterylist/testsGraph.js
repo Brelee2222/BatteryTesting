@@ -116,7 +116,7 @@ class TestGraph {
 
         graphContext.lineWidth = AXIS_WIDTH;
         graphContext.strokeStyle = AXIS_COLOR;
-        
+
         graphContext.moveTo(graphScale.minX, graphScale.minY);
         graphContext.lineTo(graphScale.minX, graphScale.maxY);
         graphContext.lineTo(graphScale.maxX, graphScale.maxY);
@@ -154,9 +154,6 @@ class TestGraph {
             }).sort((a, b) => a.point.x - b.point.x);    
 
         let lastPoint = testPoints.shift();
-        
-        graphContext.moveTo(lastPoint.point.x, lastPoint.point.y);
-
     
         graphContext.lineWidth = TEST_LINE_WIDTH;
 
@@ -169,6 +166,8 @@ class TestGraph {
             graphContext.beginPath();
 
             graphContext.strokeStyle = gradient;
+
+            graphContext.moveTo(lastPoint.point.x, lastPoint.point.y);
 
             graphContext.lineTo(testPoint.point.x, testPoint.point.y);
 
