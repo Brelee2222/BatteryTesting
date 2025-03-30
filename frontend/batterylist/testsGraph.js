@@ -166,8 +166,6 @@ class TestGraph {
             gradient.addColorStop(1, testPoint.color);
 
             graphContext.strokeStyle = gradient;
-            
-            graphContext.beginPath();
 
             graphContext.lineTo(testPoint.point.x, testPoint.point.y);
 
