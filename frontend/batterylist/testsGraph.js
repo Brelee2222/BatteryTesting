@@ -148,7 +148,7 @@ class TestGraph {
                 const multiplier = (test.startVoltage - testVoltageScale.minX) / (testVoltageScale.maxX - testVoltageScale.minX);
                 
                 return {
-                    color : `rgb(${multiplier * (HIGH_VOLTAGE_COLOR.r - LOW_VOLTAGE_COLOR.r) + LOW_VOLTAGE_COLOR.r} ${multiplier * (HIGH_VOLTAGE_COLOR.g - LOW_VOLTAGE_COLOR.g) + LOW_VOLTAGE_COLOR.g} ${multiplier * (HIGH_VOLTAGE_COLOR.b - LOW_VOLTAGE_COLOR.b) + LOW_VOLTAGE_COLOR.b})`, 
+                    color : `rgb(${multiplier * (LOW_VOLTAGE_COLOR.r - HIGH_VOLTAGE_COLOR.r) + HIGH_VOLTAGE_COLOR.r} ${multiplier * (LOW_VOLTAGE_COLOR.g - HIGH_VOLTAGE_COLOR.g) + HIGH_VOLTAGE_COLOR.g} ${multiplier * (LOW_VOLTAGE_COLOR.b - HIGH_VOLTAGE_COLOR.b) + HIGH_VOLTAGE_COLOR.b})`, 
                     point : this.transferScale(this.testToPoint(test))
                 }
             }).sort((a, b) => a.point.x - b.point.x);    
