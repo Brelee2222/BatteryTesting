@@ -166,15 +166,16 @@ class TestGraph {
             
             gradient.addColorStop(0, lastPoint.color);
             gradient.addColorStop(1, testPoint.color);
-            
-            graphContext.strokeStyle = gradient;
 
             graphContext.beginPath();
+
+            graphContext.strokeStyle = gradient;
+            graphContext.lineWidth = TEST_LINE_WIDTH;
 
             graphContext.lineTo(testPoint.point.x, testPoint.point.y);
 
             graphContext.closePath();
-            
+
             graphContext.stroke();
 
             lastPoint = testPoint;
