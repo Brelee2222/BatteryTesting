@@ -195,5 +195,3 @@ export function displayGraphs() {
 
     graphs.forEach(graph => graph.displayTests(tests));
 }
-
-window.displayGraphs = displayGraphs;
