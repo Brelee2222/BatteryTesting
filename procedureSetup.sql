@@ -66,7 +66,7 @@ END$$
 
 CREATE PROCEDURE getTest(testId BIGINT UNSIGNED)
 BEGIN
-    SELECT Tests.batteryId, MIN(voltage) AS minVoltage, MAX(voltage) AS maxVoltage, MIN(current) AS minCurrent, MAX(current) AS maxCurrent, capacity, duration, startVoltage
+    SELECT Tests.batteryId, MIN(voltage) AS minVoltage, MAX(voltage) AS maxVoltage, MIN(current) AS minCurrent, MAX(current) AS maxCurrent, capacity, duration, startVoltage, startTime
     FROM Tests, (SELECT current, voltage FROM Timestamps WHERE Timestamps.testId = testId) AS Timestamps
     WHERE startTime = testId
     GROUP BY startTime
