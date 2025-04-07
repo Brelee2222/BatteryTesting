@@ -1,5 +1,14 @@
 import { getBattery, addBattery, removeBattery } from "./battery.js";
 
+/**
+ * @typedef {import("./battery.js").Battery} Battery
+ * @typedef {import("./battery.js").FullBattery} FullBattery
+ */
+
+/**
+ * Requests deletion of current battery to server.
+ * @returns {Battery | FullBattery} Deleted battery information
+ */
 export function deleteBatteryProfile() {
     const batteryId = getBattery().id;
 
